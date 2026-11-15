@@ -33,11 +33,11 @@ function PagedPlaceGrid({ category, search, featured, trending }) {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         {[...Array(6)].map((_, i) => (
           <div key={i} className="rounded-2xl overflow-hidden bg-white dark:bg-dark-800 border border-neutral-200 dark:border-dark-700 shadow-sm">
-            <div className="h-48 bg-neutral-200 dark:bg-dark-700 animate-pulse" />
-            <div className="p-4 space-y-3">
+            <div className="h-32 sm:h-48 bg-neutral-200 dark:bg-dark-700 animate-pulse" />
+            <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
               <div className="h-5 bg-neutral-200 dark:bg-dark-700 rounded animate-pulse w-3/4" />
               <div className="h-4 bg-neutral-200 dark:bg-dark-700 rounded animate-pulse w-1/2" />
               <div className="h-3 bg-neutral-200 dark:bg-dark-700 rounded animate-pulse" />
@@ -81,9 +81,9 @@ function PagedPlaceGrid({ category, search, featured, trending }) {
   return (
     <div className="space-y-8">
       {places.length === 0 && <p className="text-center text-sm text-neutral-500">No destinations on this page.</p>}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         {places.map((place, i) => (
-          <PlaceCard key={place._id} place={place} index={i} />
+          <PlaceCard key={place._id} place={place} index={i} compact />
         ))}
       </div>
       {(page > 1 || data?.pages > 1) && (

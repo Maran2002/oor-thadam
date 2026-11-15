@@ -32,7 +32,7 @@ export default function ExplorePage() {
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-dark-900 pb-24">
       {/* Premium Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-neutral-200/60 dark:border-dark-800/60">
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-neutral-200/60 dark:border-dark-800/60">
         <div className="absolute inset-0 bg-white dark:bg-dark-900 z-0">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-100 dark:bg-primary-900/20 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob"></div>
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-secondary-100 dark:bg-secondary-900/20 rounded-full mix-blend-multiply dark:mix-blend-lighten filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -81,7 +81,7 @@ export default function ExplorePage() {
       </section>
 
       {/* Main Content Layout */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-12">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-8">
           <h2 className="text-2xl font-serif font-bold text-neutral-900 dark:text-white flex items-center gap-2">
             <MapPin className="text-primary-500" />
@@ -100,7 +100,7 @@ export default function ExplorePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-8 items-start">
           {/* Desktop Sidebar Filters */}
           <motion.aside
             className="hidden lg:block lg:col-span-1 sticky top-32"

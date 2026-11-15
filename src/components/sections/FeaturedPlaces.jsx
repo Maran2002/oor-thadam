@@ -12,14 +12,14 @@ export function FeaturedPlaces() {
   const places = data?.items || []
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-50 dark:bg-dark-800/50 relative overflow-hidden">
+    <section className="py-12 sm:py-24 px-4 sm:px-6 lg:px-8 bg-neutral-50 dark:bg-dark-800/50 relative overflow-hidden">
       {/* Background accents */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         <motion.div
-          className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6"
+          className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-14 gap-4 sm:gap-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -47,9 +47,9 @@ export function FeaturedPlaces() {
         </motion.div>
 
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="rounded-2xl bg-neutral-200 dark:bg-dark-700 animate-shimmer h-72" />
+              <div key={i} className="rounded-2xl bg-neutral-200 dark:bg-dark-700 animate-shimmer h-56 sm:h-72" />
             ))}
           </div>
         ) : error ? (
@@ -70,9 +70,9 @@ export function FeaturedPlaces() {
             No places found. Check back soon!
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             {places.map((place, i) => (
-              <PlaceCard key={place._id} place={place} index={i} />
+              <PlaceCard key={place._id} place={place} index={i} compact />
             ))}
           </div>
         )}
