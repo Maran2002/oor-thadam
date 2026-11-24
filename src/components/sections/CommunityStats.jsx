@@ -1,39 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Users, Star, Eye } from 'lucide-react'
 
-const EMPTY_STATS = [
-  { id: 'places', label: 'Places Catalogued', value: '—', icon: MapPin, color: 'text-primary-400', bg: 'bg-primary-500/10' },
-  { id: 'users', label: 'Community Members', value: '—', icon: Users, color: 'text-secondary-400', bg: 'bg-secondary-500/10' },
-  { id: 'reviews', label: 'Reviews Written', value: '—', icon: Star, color: 'text-accent-400', bg: 'bg-accent-500/10' },
-  { id: 'visitors', label: 'Monthly Page Views', value: '—', icon: Eye, color: 'text-primary-300', bg: 'bg-primary-400/10' },
-]
-
-export function CommunityStats() {
-  const [stats, setStats] = useState(EMPTY_STATS)
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const res = await fetch('/api/stats/public')
-        const json = await res.json()
-        if (json.success) {
-          const { totalPlaces, totalUsers, totalReviews, monthlyPageViews } = json.data
-          setStats([
-            { id: 'places', label: 'Places Catalogued', value: formatValue(totalPlaces), icon: MapPin, color: 'text-primary-400', bg: 'bg-primary-500/10' },
-            { id: 'users', label: 'Community Members', value: formatValue(totalUsers), icon: Users, color: 'text-secondary-400', bg: 'bg-secondary-500/10' },
-            { id: 'reviews', label: 'Reviews Written', value: formatValue(totalReviews), icon: Star, color: 'text-accent-400', bg: 'bg-accent-500/10' },
-            { id: 'visitors', label: 'Monthly Page Views', value: formatValue(monthlyPageViews), icon: Eye, color: 'text-primary-300', bg: 'bg-primary-400/10' },
-          ])
-        }
-      } catch (err) {
-        console.error('Failed to fetch stats', err)
-      }
-    }
-    fetchStats()
-  }, [])
+export function CommunityStats({ stats: data = {} }) {
+  const stats = [
+    { id: 'places', label: 'Places Catalogued', value: formatValue(data.totalPlaces), icon: MapPin, color: 'text-primary-400', bg: 'bg-primary-500/10' },
+    { id: 'users', label: 'Community Members', value: formatValue(data.totalUsers), icon: Users, color: 'text-secondary-400', bg: 'bg-secondary-500/10' },
+    { id: 'reviews', label: 'Reviews Written', value: formatValue(data.totalReviews), icon: Star, color: 'text-accent-400', bg: 'bg-accent-500/10' },
+    { id: 'visitors', label: 'Monthly Page Views', value: formatValue(data.monthlyPageViews), icon: Eye, color: 'text-primary-300', bg: 'bg-primary-400/10' },
+  ]
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-dark-900 relative overflow-hidden">

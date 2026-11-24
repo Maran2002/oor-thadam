@@ -1,15 +1,11 @@
 'use client'
 
-import { usePlaces } from '@/lib/hooks/usePlaces'
 import { PlaceCard } from '../place/PlaceCard'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { TrendingUp, ArrowRight } from 'lucide-react'
-import { ErrorState } from '@/components/common/ErrorState'
 
-export function TrendingLocations() {
-  const { data, loading, error, refetch } = usePlaces(1, 3, null, null, null, true)
-  const places = data?.items || []
+export function TrendingLocations({ places = [] }) {
 
   return (
     <section className="py-12 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-dark-900 relative overflow-hidden">
@@ -44,26 +40,7 @@ export function TrendingLocations() {
           </Link>
         </motion.div>
 
-        {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="rounded-2xl bg-neutral-200 dark:bg-dark-700 animate-shimmer h-56 sm:h-72" />
-            ))}
-          </div>
-        ) : error ? (
-          <ErrorState
-            variant="section"
-            title="Couldn't Load Trending Locations"
-            message="We're having trouble retrieving popular destinations right now. Please check your connection and try again."
-            onRetry={refetch}
-            retryText="Try Again"
-            secondaryAction={{
-              label: 'Browse Explore Page',
-              href: '/explore',
-              icon: ArrowRight,
-            }}
-          />
-        ) : places.length === 0 ? (
+        {places.length === 0 ? (
           <div className="text-center text-neutral-500 dark:text-neutral-400 py-16">
             No trending locations right now. Check back soon!
           </div>

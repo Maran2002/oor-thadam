@@ -47,6 +47,21 @@ async function verifyJwt(token) {
 export async function proxy(request) {
   const { pathname } = request.nextUrl
 
+  // Public data is rendered into pages on the server. Do not let a browser's
+  // address-bar navigation turn these read endpoints into browsable documents.
+  const serverRenderedDataRoutes = [
+    '/api/settings/public',
+    '/api/stats/public',
+    '/api/places',
+  ]
+  if (
+    request.method === 'GET' &&
+    serverRenderedDataRoutes.some((path) => pathname === path || pathname.startsWith(`${path}/`)) &&
+    request.headers.get('sec-fetch-mode') === 'navigate'
+  ) {
+    return new Response(null, { status: 404 })
+  }
+
   if (pathname.startsWith('/api/') && !['GET', 'HEAD', 'OPTIONS'].includes(request.method)) {
     const origin = request.headers.get('origin')
     if (!origin || origin !== request.nextUrl.origin) {
